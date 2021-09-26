@@ -3,11 +3,36 @@
         {
             "type": "aws-sam",
             "request": "direct-invoke",
+            "name": "Invoke Lambda with API Gateway",
+            "invokeTarget": {
+                "target": "api",
+                "templatePath": "Template Location",
+                "logicalId": "Function Logical ID"
+            },
+            "api": {
+                "path": "../handler",
+                "httpMethod": "get",
+                "payload": {
+                    "json":{
+                        "cpf": "18208015784",
+                        "nome": "Leonardo Bloise",
+                        "idade": 20,
+                        "email": "leonardo.bloise2000@gmail.com",
+                        "salario": 999.99,
+                        "cargo": "Desenvolvedor"
+                    }
+                }
+            }
+        },
+        
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
             "name": "ServerlessChallenge:src/services/funcionario.service.AtualizarFuncionario (nodejs14.x)",
             "invokeTarget": {
                 "target": "code",
                 "projectRoot": "${workspaceFolder}/",
-                "lambdaHandler": "src/services/funcionario.service.AtualizarFuncionario"
+                "lambdaHandler": "src/services/funcionario.service."
             },
             "lambda": {
                 "runtime": "nodejs14.x",

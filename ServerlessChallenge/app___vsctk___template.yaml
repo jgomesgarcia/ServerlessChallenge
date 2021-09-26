@@ -2,7 +2,7 @@ Resources:
   ServerlessChallenge:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/services/funcionario.service.AtualizarFuncionario
+      Handler: src/services/funcionario.service.
       CodeUri: >-
         C:/Users/joao.garcia/Documents/Projetos de
         Trabalho/ServerlessChallenge/ServerlessChallenge

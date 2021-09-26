@@ -2,7 +2,7 @@ export default interface IFuncionario{
     cpf: string,
     nome: string,
     idade: number,
-    email: number,
+    email: string,
     cargo: string,
     salario: number,
 }
