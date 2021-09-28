@@ -17,14 +17,6 @@ const funcionario: IFuncionario = {
     salario: 2500
 }
 
-const funcionarioError: IFuncionario = {
-    cpf: "342",
-    idade: 0,
-    nome: "1",
-    cargo: "@",
-    email: "",
-    salario: 10000000
-}
 describe("Teste  da Rotas de Funcionario", () => {
     it("POST /funcionario/create - Status: 200", async () => {
         const response = await api.post("/funcionario/create", funcionario)
