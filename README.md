@@ -1,5 +1,7 @@
 # ServerlessChallenge
-    Este é um projeto básico de uma função AWS Lambda que realiza um CRUD de Funcionários em um banco de dados MySQL
+
+## Descrição
+Este é um projeto básico de uma função AWS Lambda que realiza um CRUD de Funcionários em um banco de dados MySQL
 ## Tecnologias Utilizadas
 
 * Node JS
@@ -19,11 +21,11 @@
     * parametros: `cpf: string`
     
 * POST /funcionario/create
-    * Corpo: [IFuncionario](./#IFuncionario)
+    * Corpo: [IFuncionario](#IFuncionario)
 
 * UPDATE /funcionario/update/{cpf}
     * parametros: `cpf: string`
-    * Corpo: [IFuncionario](./#IFuncionario)
+    * Corpo: [IFuncionario](#IFuncionario)
 
 * DELETE /funcionario/delete/{cpf}
     * parametros: `cpf: string`
