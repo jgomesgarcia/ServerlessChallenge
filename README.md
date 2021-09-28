@@ -29,6 +29,8 @@
     * parametros: `cpf: string`
 ## Objeto
 <h3 href="funcionario"> IFuncionario </h3>
+[Ver interface no código](ServerlessChallenge/src/interfaces/funcionario.ts)
+
 ~~~
     {
         "cpf": "",
