@@ -42,7 +42,7 @@ const ValidarObjetoFuncionario = (funcionario: IFuncionario) => {
 export const ObterTodosFuncionarios = async (req: Request, res: Response) => {
     try {
         const query = "SELECT cpf, nome, idade, email, salario, cargo FROM serverless.funcionario WHERE (`isActived` = 1)";
-        const consulta = new Promise<IFuncionario>((resolve, reject) => {
+        const consulta = new Promise<any>((resolve, reject) => {
             pool.query(query, (err, results) => {
                 if (err)
                     reject(err);
@@ -69,7 +69,7 @@ export const ObterFuncionarioPorCPF = async (req: Request<{ cpf: string }>, res:
             return res.status(400).json({ errors: ["CPF inválido."] });
 
         const query = "SELECT cpf, nome, idade, email, salario, cargo FROM serverless.funcionario WHERE (`cpf` = ? AND `isActived` = 1)";
-        const consulta = new Promise<IFuncionario>((resolve, reject) => {
+        const consulta = new Promise<any>((resolve, reject) => {
             pool.query(
                 query,
                 [params?.cpf],
@@ -102,7 +102,7 @@ export const CadastrarFuncionario = async (req: Request<any, any, IFuncionario>,
             return res.status(400).json({ messages: errors });
 
         const query = "INSERT INTO `serverless`.`funcionario` (`cpf`, `nome`, `idade`, `email`, `salario`, `cargo`) VALUES (?, ?, ?, ? , ?, ?);";
-        const consulta = new Promise<IFuncionario>((resolve, reject) => {
+        const consulta = new Promise<any>((resolve, reject) => {
             pool.query(
                 query,
                 [body?.cpf, body?.nome, body?.idade, body?.email, body?.salario, body?.cargo],
@@ -116,7 +116,7 @@ export const CadastrarFuncionario = async (req: Request<any, any, IFuncionario>,
 
         const funcionario = await consulta;
 
-        return res.status(200).json(funcionario);
+        return res.status(200).json(body);
     } catch (error) {
         console.log(error);
         return res.status(error?.number ?? 500).json({
@@ -138,7 +138,7 @@ export const AtualizarFuncionario = async (req: Request<{ cpf: string }, any, IF
             return res.status(400).json({ messages: errors });
 
         const query = "UPDATE `serverless`.`funcionario` SET `nome` = ?, `email` = ?, `idade` = ?, `salario` = ?, `cargo` = ? WHERE (`cpf` = ? AND  `isActived` = 1);";
-        const consulta = new Promise<IFuncionario>((resolve, reject) => {
+        const consulta = new Promise<any>((resolve, reject) => {
             pool.query(
                 query,
                 [body?.nome, body?.email, body?.idade, body?.salario, body?.cargo, params?.cpf ?? body?.cpf,],
@@ -152,7 +152,7 @@ export const AtualizarFuncionario = async (req: Request<{ cpf: string }, any, IF
 
         const funcionario = await consulta;
 
-        return res.status(200).json(funcionario);
+        return res.status(200).json({...body, cpf: params.cpf});
     } catch (error) {
         console.log(error);
         return res.status(error?.number ?? 500).json({
@@ -169,7 +169,7 @@ export const ExcluirFuncionario = async (req: Request<{ cpf: string }>, res: Res
             return res.status(400).json({ errors: ["CPF inválido."] });
 
         const query = "UPDATE `serverless`.`funcionario` SET `isActived` = '0' WHERE (`cpf` = ? AND  `isActived` = 1);";
-        const consulta = new Promise<IFuncionario>((resolve, reject) => {
+        const consulta = new Promise<any>((resolve, reject) => {
             pool.query(
                 query,
                 [params?.cpf],
@@ -182,8 +182,9 @@ export const ExcluirFuncionario = async (req: Request<{ cpf: string }>, res: Res
         });
 
         const funcionario = await consulta;
-
-        return res.status(200).json(`Funcionário com o CPF '${params?.cpf}' Apagado Sucesso`);
+        if(funcionario?.affectedRows === 0)
+            return res.status(204)
+        return res.status(200).json(funcionario);
     } catch (error) {
         console.log(error);
         return res.status(error?.number ?? 500).json({
