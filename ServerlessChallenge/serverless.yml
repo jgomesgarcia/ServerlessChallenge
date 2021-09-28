@@ -25,10 +25,6 @@ functions:
     handler: handler.handler  
     events:
       - http:
-          path: /api-docs
-          method: get
-          cors: true
-      - http:
           path: /funcionario
           method: get
           cors: true
