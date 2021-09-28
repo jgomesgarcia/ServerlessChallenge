@@ -25,6 +25,10 @@ functions:
     handler: handler.handler  
     events:
       - http:
+          path: /api-docs
+          method: get
+          cors: true
+      - http:
           path: /funcionario
           method: get
           cors: true
@@ -37,11 +41,11 @@ functions:
           method: post
           cors: true
       - http:
-          path: /funcionario/{cpf}/update
+          path: /funcionario/update/{cpf}
           method: put
           cors: true
       - http:
-          path: /funcionario/{cpf}/delete
+          path: /funcionario/delete/{cpf}
           method: delete
     cors: true
     vpc:

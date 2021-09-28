@@ -1,0 +1,320 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Lambda Serverless Challeng",
+        "contact": {
+            "email": "joao.garcia.profissional@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://mxtjiz7w2f.execute-api.sa-east-1.amazonaws.com/dev/funcionario",
+            "description": "API de teste"
+        }
+    ],
+    "paths": {
+        "/funcionario": {
+            "get": {
+                "summary": "Obter Todos os Funcionários Ativos",
+                "description": "Esta rota busca todos os funcionários ativos no banco.",
+                "tag": [
+                    "Funcionario"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Funcionario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Acesso nâo autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/funcionario": {
+            "post": {
+                "summary": "Cadastro de Funcionário",
+                "description": "Esta rota cadastra um novo funcionário no banco.",
+                "tag": [
+                    "Funcionario"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Funcionario"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Dados Inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ArrayString"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Acesso nâo autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Funcionario"
+                            }
+                        },
+                        "exemples": {
+                            "funcionario":{
+                                "value":{
+                                    "cpf": "12345678910",
+                                    "nome": "Roberto Costa",
+                                    "idade": 27,
+                                    "email": "Roberto.costa@exemplo.com.br",
+                                    "cargo": "Colaborador",
+                                    "salario": 6500.50
+                                }
+                            }
+                        }   
+                    }
+                }
+            }
+        },
+        "/funcionario/{cfp}": {
+            "get": {
+                "summary": "Obter Um Funcionário Ativo pelo CPF",
+                "description": "Esta rota busca um funcionário ativo pelo CPF.",
+                "tag": [
+                    "Funcionario"
+                ],
+                "parameters": [
+                    {
+                        "name": "cpf",
+                        "in": "path",
+                        "description": "CPF do Funcionário",
+                        "required": true,
+                        "schema": {
+                          "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Funcionario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Acesso não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/funcionario/update/{cpf}":{
+            "update": {
+                "summary": "Atualização de Funcionário",
+                "description": "Esta rota atualiza os dados de um funcionário no banco.",
+                "tag": [
+                    "Funcionario"
+                ],
+                "parameters": [
+                    {
+                        "name": "cpf",
+                        "in": "path",
+                        "description": "CPF do Funcionário",
+                        "required": true,
+                        "schema": {
+                          "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Funcionario"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Dados Inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ArrayString"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Acesso nâo autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Funcionario"
+                            }
+                        },
+                        "exemples": {
+                            "funcionario":{
+                                "value":{
+                                    "nome": "Roberto Costa",
+                                    "idade": 27,
+                                    "email": "Roberto.costa@exemplo.com.br",
+                                    "cargo": "Colaborador",
+                                    "salario": 6500.50
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/funcionario/delete/{cpf}":{
+            "delete": {
+                "summary": "Desativação de Funcionário",
+                "description": "Esta rota desativa um funcionário no banco.",
+                "tag": [
+                    "Funcionario"
+                ],
+                "parameters": [
+                    {
+                        "name": "cpf",
+                        "in": "path",
+                        "description": "CPF do Funcionário",
+                        "required": true,
+                        "schema": {
+                          "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Parametros Inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ArrayString"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Acesso nâo autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Empty"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Empty": {
+                "type": "object",
+                "title": "Empty Schema"
+            },
+            "Funcionario": {
+                "type": "object",
+                "properties": {
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "idade": {
+                        "type": "number"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "cargo": {
+                        "type": "string"
+                    },
+                    "salario": {
+                        "type": "number"
+                    }
+                }
+            },
+            "ArrayFuncionario": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/Funcionario"
+                }
+            },
+            "ArrayString": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
