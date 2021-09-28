@@ -40,7 +40,7 @@ O banco possui 7 Colunas:
 * salario - varchar (50)
 * isActived - isActived
 
-[Ver string de criação da tabel](ServerlessChallenge/Queries/funcionario_tb.sql)
+[Ver string de criação da tabel](Queries/funcionario_tb.sql)
 
 ## Objeto
 <h3 href="funcionario"> IFuncionario </h3>
