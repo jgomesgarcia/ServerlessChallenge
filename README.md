@@ -38,7 +38,7 @@ O banco possui 7 Colunas:
 * email - varchar(50)
 * cargo - decimal(8,2)
 * salario - varchar (50)
-* isActived - isActived
+* isActived - boolean
 
 [Ver string de criação da tabel](Queries/funcionario_tb.sql)
 
